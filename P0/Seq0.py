@@ -35,3 +35,20 @@ def seq_reverse(sequence):
         rever_seq = e + empty
         empty = rever_seq
     return rever_seq
+
+def seq_complement(sequence):
+    empty_seq = ''
+    for e in sequence:
+        if e == 'A':
+            f = empty_seq + 'T'
+            empty_seq = f
+        elif e == 'C':
+            f = empty_seq + 'G'
+            empty_seq = f
+        elif e == 'T':
+            f = empty_seq + 'A'
+            empty_seq = f
+        elif e == 'G':
+            f = empty_seq + 'C'
+            empty_seq = f
+    return f

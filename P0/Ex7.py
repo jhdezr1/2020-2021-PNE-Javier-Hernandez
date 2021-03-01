@@ -3,11 +3,11 @@ import Seq0
 GENE_FOLDER = './sequences/'
 ID = 'U5.txt'
 
-print('--------|EXERCISE 6|-------')
+print('--------|EXERCISE 7|-------')
 
 U5_Seq = Seq0.seq_read_fasta(GENE_FOLDER + ID)[:20]
-reversed_U5 = Seq0.seq_reverse(U5_Seq)
+complemented_U5 = Seq0.seq_complement(U5_Seq)
 
 print('Gene U5:')
 print('Frag:', U5_Seq)
-print('Rev:', reversed_U5)
+print('complement:', complemented_U5)
