@@ -70,4 +70,15 @@ class Seq:
                 elif e == 'G':
                     G += 1
                 total += 1
-            return A, C, T, G, total
+            return A, C, T, G
+
+    def count(self):
+        a, c, g, t = self.count_base()
+        return {'A': a, 'C': c, 'G': g, 'T': t}
+
+def test_sequences():
+    s1 = Seq()
+    s2 = Seq('ACTGA')
+    s3 = Seq('Invalid Sequence')
+
+    return s1, s2, s3
