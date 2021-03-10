@@ -71,36 +71,3 @@ class Seq:
                     G += 1
                 total += 1
             return A, C, T, G, total
-
-class Gene(Seq):
-    """This class is derived from the Seq Class
-       All the objects of class Gene will inherite
-       the methods from the Seq class
-    """
-    super().__init__(strbases)  #
-    self.name = name
-    print('New gene created')
-
-
-    def __str__(self):
-        """Print the gene name along with the sequence"""
-        return self.name + "-" + self.strbases
-
-
-    def len(self):
-        """Calculate the length of the sequence and print the sequence as  well"""
-        if len(self.strbases) < 10:
-            return "Sequence" + self.strbases + "is not long"
-        else:
-            return "Sequence" + self.strbases + "is long"
-
-
-
-    
-# --- Main program
-s1 = Seq("AGTACACTGGT")
-g = Gene("CGTAAC", "FRAT1")
-
-# -- Printing the objects
-print(f"Sequence 1: {s1}")
-print(f"Gene: {g}")

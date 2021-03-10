@@ -1,4 +1,4 @@
-from seq01 import Seq
+from Seq1 import Seq
 print('-----|Exercise 4|-----')
 s1 = Seq()
 s2 = Seq('ACTGA')
