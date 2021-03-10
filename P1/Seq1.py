@@ -1,4 +1,5 @@
 import termcolor
+from pathlib import Path
 
 class Seq:
     """A class for representing sequences"""
@@ -83,6 +84,30 @@ class Seq:
             return Seq.INVALID_SEQUENCE
         else:
             return self.strbases[::-1]
+    def complement(self):
+        if self.strbases == Seq.NULL_SEQUENCE:
+            return Seq.NULL_SEQUENCE
+        elif self.strbases == Seq.INVALID_SEQUENCE:
+            return Seq.INVALID_SEQUENCE
+        else:
+            complement = ''
+            for e in self.strbases:
+                if e == 'A':
+                    complement += 'T'
+                elif e == 'C':
+                    complement += 'G'
+                elif e == 'T':
+                    complement += 'A'
+                elif e == 'G':
+                    complement += 'G'
+            return complement
+
+    @staticmethod
+    def take_out_first_line(seq):
+        return seq[seq.find('\n') + 1:].replace('\n', '')
+
+    def read_fasta(self, filename):
+        self.strbases = Seq.take_out_first_line(Path(filename).read_text())
 
 def test_sequences():
     s1 = Seq()
