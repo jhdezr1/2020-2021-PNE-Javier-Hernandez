@@ -76,6 +76,14 @@ class Seq:
         a, c, g, t = self.count_base()
         return {'A': a, 'C': c, 'G': g, 'T': t}
 
+    def reverse(self):
+        if self.strbases == Seq.NULL_SEQUENCE:
+            return Seq.NULL_SEQUENCE
+        elif self.strbases == Seq.INVALID_SEQUENCE:
+            return Seq.INVALID_SEQUENCE
+        else:
+            return self.strbases[::-1]
+
 def test_sequences():
     s1 = Seq()
     s2 = Seq('ACTGA')
