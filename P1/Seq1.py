@@ -109,6 +109,16 @@ class Seq:
     def read_fasta(self, filename):
         self.strbases = Seq.take_out_first_line(Path(filename).read_text())
 
+    def frequent_base(self):
+        frequent = ''
+        gene_dict = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
+        for d in self.strbases:
+            gene_dict[d] += 1
+        for n in gene_dict.keys():
+            if gene_dict[n] == max(gene_dict.values()):
+                frequent += n + ' '
+        return frequent
+
 def test_sequences():
     s1 = Seq()
     s2 = Seq('ACTGA')
