@@ -6,7 +6,6 @@ def print_result(i, sequence):
     print('Rev:', sequence.reverse())
     print('Comp: ', sequence.complement())
 
-# como se accedia a otro directorio ??
 PROJECT_PATH = '../P0/sequences/'
 
 print('-----| Practice 1, Exercise 10|------')
