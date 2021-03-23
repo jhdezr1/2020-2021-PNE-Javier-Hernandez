@@ -10,7 +10,5 @@ PORT = 12000
 c = Client(IP, PORT)
 
 print(c)
-
-# -- Send a message to the server
 c.debug_talk("This is a trial number 1")
 c.debug_talk("This is a trial number 2")
