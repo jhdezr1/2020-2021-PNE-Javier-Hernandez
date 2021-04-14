@@ -8,7 +8,7 @@ ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # Configure the Server's IP and PORT
-PORT = 8080
+PORT = 1201
 IP = "127.0.0.1"
 
 # -- Step 1: create the socket
@@ -72,7 +72,10 @@ while True:
         #if formatted_message == 'PING':
             #server_utils.ping()
         if command == "PING":
-            server_utils.ping(cs)
+            print(server_utils.print_colored("PING Command", "green"))
+            response = "OK!\n"
+            # -- The message has to be encoded into bytes
+            cs.send(response.encode())
 
 
         # -- Send a response message to the client
