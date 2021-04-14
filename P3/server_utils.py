@@ -15,6 +15,7 @@ def get(cs, list_sequences, argument):
     print(response)
     cs.send(response.encode())
 def info_send(cs, argument):
+    termcolor.cprint('INFO', 'green')
     s = Seq(argument)
     info_dict = s.info_seq()
     response1 = 'Total length: ' + str(len(argument)) + '\n'
@@ -27,3 +28,27 @@ def info_send(cs, argument):
     cs.send(response4.encode())
     response5 = 'T: ' + str(info_dict['T'][0]) + ' ' + str(info_dict['T'][1]) + '%' + '\n'
     cs.send(response5.encode())
+    print(response1, response2, response3, response4, response5)
+def comp_send(cs, argument):
+    termcolor.cprint('COMP', 'green')
+    s = Seq(argument)
+    complement = s.complement()
+    response = complement + '\n'
+    cs.send(response.encode())
+    print(response)
+
+def rev_send(cs, argument):
+    termcolor.cprint('REV', 'green')
+    s = Seq(argument)
+    rev = s.reverse()
+    response = rev + '\n'
+    cs.send(response.encode())
+    print(response)
+def gene_send(cs, argument):
+    gene_path = './sequences/'
+    termcolor.cprint('GENE', 'green')
+    s = Seq()
+    s.read_fasta(gene_path + argument)
+    response = str(s) + '\n'
+    print(response)
+    cs.send(response.encode())

@@ -1,6 +1,6 @@
 import socket
 import server_utils
-from Seq1 import Seq
+
 
 list_sequences = ["ACGTAAAAGTTTAAGCGCCAAT", "AGTCCCCCCAAAATTTTGGGGGAATAT", "AGAGAGAGGATTATTATATACTCTTC", "GGGGGGGGGGGTTTTTTTTTAAAAAACCCC", "AAAAAATTTTTCGAAAAAAA"]
 # -- Step 1: create the socket
@@ -10,7 +10,7 @@ ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # Configure the Server's IP and PORT
-PORT = 1201
+PORT = 1202
 IP = "127.0.0.1"
 
 # -- Step 1: create the socket
@@ -88,6 +88,13 @@ while True:
                 server_utils.get(cs, list_sequences, 4)
         if command == 'INFO':
             server_utils.info_send(cs, argument)
+        if command == 'COMP':
+            server_utils.comp_send(cs, argument)
+        if command == 'REV':
+            server_utils.rev_send(cs, argument)
+        if command == 'GENE':
+            server_utils.gene_send(cs, argument)
+
         # -- Send a response message to the client
         #try is used to avoid the server to stop when something not transformable into an integer is introduced
             #response = "OK!"
