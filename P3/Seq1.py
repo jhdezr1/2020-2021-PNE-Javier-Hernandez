@@ -63,9 +63,14 @@ class Seq:
                 else:
                     t += 1
         return a, c, g, t
-    def count(self):
+    def info_seq(self):
         a, c, g, t = self.count_bases()
-        return {'A': a, 'C': c, 'G': g, 'T': t}
+        sum_all = a + c + g + t
+        ap = a * 100 / sum_all
+        cp = c * 100 / sum_all
+        gp = g * 100 / sum_all
+        tp = t * 100 / sum_all
+        return {'A': [a, ap], 'C': [c, cp], 'G': [g, gp], 'T': [t, tp]}
 
     def reverse(self):
         if self.strbases == Seq.NULL_SEQUENCE:

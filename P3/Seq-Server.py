@@ -1,5 +1,7 @@
 import socket
 import server_utils
+from Seq1 import Seq
+
 list_sequences = ["ACGTAAAAGTTTAAGCGCCAAT", "AGTCCCCCCAAAATTTTGGGGGAATAT", "AGAGAGAGGATTATTATATACTCTTC", "GGGGGGGGGGGTTTTTTTTTAAAAAACCCC", "AAAAAATTTTTCGAAAAAAA"]
 # -- Step 1: create the socket
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -68,26 +70,32 @@ while True:
             command =formatted_message[0]
             argument = formatted_message[1]
 
-
-        #if formatted_message == 'PING':
-            #server_utils.ping()
         if command == "PING":
-            print(server_utils.print_colored("PING Command", "green"))
-            response = "OK!\n"
+            response = 'OK!\n'
+            server_utils.ping()
             # -- The message has to be encoded into bytes
             cs.send(response.encode())
-
-
+        if command == 'GET':
+            if argument == '0':
+                server_utils.get(cs, list_sequences, 0)
+            elif argument == '1':
+                server_utils.get(cs, list_sequences, 1)
+            elif argument == '2':
+                server_utils.get(cs, list_sequences, 2)
+            elif argument == '3':
+                server_utils.get(cs, list_sequences, 3)
+            elif argument == '4':
+                server_utils.get(cs, list_sequences, 4)
+        if command == 'INFO':
+            server_utils.info_send(cs, argument)
         # -- Send a response message to the client
         #try is used to avoid the server to stop when something not transformable into an integer is introduced
             #response = "OK!"
         # -- The message has to be encoded into bytes
             #cs.send(str(response).encode()) # the int is back to a str and encoded into bytes by .encode and sent back to client
-        elif command == 'GET':
-            server_utils.get(cs, list_sequences, argument)
 
-        else:
-            response = "Not available command"
-            cs.send(str(response).encode())
+        #else:
+           # response = "Not available command"
+            #cs.send(str(response).encode())
         # -- Close the data socket
         cs.close()
