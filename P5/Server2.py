@@ -12,19 +12,23 @@ PORT = 8081
 BASES_INFORMATION = {
     'A': {'link': "https://en.wikipedia.org/wiki/Adenine",
           'formula': "C5H5NH",
-          'name': "ADENINE"
+          'name': "ADENINE",
+          'colour': 'lightgreen'
     },
     'C': {'link': "https://en.wikipedia.org/wiki/Cytosine",
           'formula': "C4H5N3O",
-          'name': "CYTOSINE"
+          'name': "CYTOSINE",
+          'colour': 'yellow'
     },
     'G': {'link': "https://en.wikipedia.org/wiki/Guanine",
           'formula': "C5H5N5O",
-          'name': "GUANINE"
+          'name': "GUANINE",
+          'colour': 'lightblue'
     },
     'T': {'link': "https://en.wikipedia.org/wiki/Thymine",
           'formula': "C5H6N2O2",
-          'name': "TYROSINE"
+          'name': "TYROSINE",
+          'colour': 'pink'
     }
 }
 
@@ -55,10 +59,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = read_html_file('./html/index.html')
         elif '/info' in self.path:
             base = self.path.split('/')[-1]
-            contents = read_html_file('.html/info/general.html').render(name=BASES_INFORMATION[base]['name'],
-                                                                        formula=BASES_INFORMATION[base]['formula'],
-                                                                        letter=base,
-                                                                        link=BASES_INFORMATION[base]['link'])
+            context = BASES_INFORMATION[base]
+            context['letter'] = base
+            contents = read_template_html_file('./html/info/general.html').render(base_information=context)
         elif self.path == '/info/A':
             contents = read_html_file('./html/info/A.html')
         elif self.path == '/info/C':
