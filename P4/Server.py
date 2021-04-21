@@ -43,25 +43,27 @@ def process_client(s):
     # -- Add the Content-Type header
     header = "Content-Type: text/html\n"
 
-    if path_name == '/':
-        body = read_html_file(HTML_ASSETS + 'Index.html')
-    elif '/info/' in path_name:
+    """elif '/info/' in path_name:
         #where is the letter? string.split('/')[-1]
         try:
             body = read_html_file(HTML_ASSETS + path_name.split('/')[-1] + '.html')
         except FileNotFoundError:
             body = read_html_file(HTML_ASSETS + 'ERROR.html')
     else:
-        body = read_html_file(HTML_ASSETS + 'ERROR.html')
+        body = read_html_file(HTML_ASSETS + 'ERROR.html')"""
 
-    """if path_name == '/info/A':
-        body = read_html_file(HTML_ASSETS + 'A.html')
+    if path_name == '/':
+        body = read_html_file('./html/Index.html')
+    elif path_name == '/info/A':
+        body = read_html_file('./html/A.html')
     elif path_name == '/info/C':
         body = read_html_file(HTML_ASSETS + 'C.html')
     elif path_name == '/info/G':
         body = read_html_file(HTML_ASSETS + 'G.html')
     elif path_name == '/info/T':
-        body = read_html_file(HTML_ASSETS + 'T.html')"""
+        body = read_html_file(HTML_ASSETS + 'T.html')
+    else:
+        body = read_html_file(HTML_ASSETS + "ERROR.html")
 
     # -- Add the Content-Length
     header += f"Content-Length: {len(body)}\n"
