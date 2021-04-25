@@ -3,7 +3,7 @@ import socketserver
 import termcolor
 import pathlib
 # Define the Server's port
-PORT = 8081
+PORT = 12568
 
 def read_html_file(filename):
     content = pathlib.Path(filename).read_text()
