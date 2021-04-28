@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bases Server</title>
+</head>
+<body>
+    <h1>Seq server</h1>
+    <p>Access to server</p>
+    <hr>
+    <form action="ping" method="get">
+        Is the server available?: <input type="submit" value="ping">
+    </form>
+    <hr>
+    <form action="get" method="get">
+        get a sequence, Select sequence number:
+        <select name="sequence">
+            {% for n in range(0, context.n_sequences) %}
+                <option value="{{n}}">{{n}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="GET">
+    </form>
+    <hr>
+    <form action="gene" method="get">
+        get a sequence, Select sequence number:
+        <select name="gene">
+            {% for n in context.list_genes %}
+                <option value="{{n}}">{{n}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="GET">
+    </form>
+    <hr>
+    <form action="operation" method="get">
+        Write a sequence: <input type="text" name="sequence">
+        select operation:
+        get a sequence, Select sequence number:
+        <select name="gene">
+            {% for n in context.list_genes %}
+                <option value="{{n}}">{{n}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="GET">
+    </form>
+</body>
+</html>
