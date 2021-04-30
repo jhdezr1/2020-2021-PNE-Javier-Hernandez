@@ -32,18 +32,6 @@
         <input type="submit" value="GET">
     </form>
     <hr>
-    <form action="operation" method="get">
-        Write a sequence: <input type="text" name="sequence">
-        select operation:
-        get a sequence, Select sequence number:
-        <select name="gene">
-            {% for n in context.list_genes %}
-                <option value="{{n}}">{{n}}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="GET">
-    </form>
-    <hr>
     <form action="operation" method = "get">
         Write a sequence: <input type="text" name="sequence">
         <br>
