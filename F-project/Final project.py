@@ -116,19 +116,22 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
         elif path_name == '/geneCalc':
-            gene_ask = arguments['gene'][0]
-            id_gene = DICT_GENES_ID[gene_ask]
-            response_dict = su.get_dict(ENDPOINT3 + id_gene)
-            lists_info = su.get_list_info(response_dict)
-            context = {
-                'gene': gene_ask,
-                'length': lists_info[4],
-                'A': lists_info[0],
-                'G': lists_info[2],
-                'C': lists_info[1],
-                'T': lists_info[3]
-            }
-            contents = su.read_template_html_file('./html/geneCalc.html').render(context=context)
+            try:
+                gene_ask = arguments['gene'][0]
+                id_gene = DICT_GENES_ID[gene_ask]
+                response_dict = su.get_dict(ENDPOINT3 + id_gene)
+                lists_info = su.get_list_info(response_dict)
+                context = {
+                    'gene': gene_ask,
+                    'length': lists_info[4],
+                    'A': lists_info[0],
+                    'G': lists_info[2],
+                    'C': lists_info[1],
+                    'T': lists_info[3]
+                }
+                contents = su.read_template_html_file('./html/geneCalc.html').render(context=context)
+            except KeyError:
+                contents = su.read_template_html_file('./html/ERROR.html').render()
         else:
             contents = su.read_template_html_file('./html/ERROR.html').render()
 
