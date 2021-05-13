@@ -119,20 +119,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             gene_ask = arguments['gene'][0]
             id_gene = DICT_GENES_ID[gene_ask]
             response_dict = su.get_dict(ENDPOINT3 + id_gene)
-            sequence_asked = response_dict['seq']
-            seq_seq = Seq(sequence_asked)
-            info_dict = seq_seq.info_seq()
-            list_A = info_dict['A']
-            list_C = info_dict['C']
-            list_G = info_dict['G']
-            list_T = info_dict['T']
-            lists_info = []
-            lists_info.append(list_A)
-            lists_info.append(list_C)
-            lists_info.append(list_G)
-            lists_info.append(list_T)
-            print(lists_info)
-            contents = su.read_template_html_file('./html/ERROR.html').render()
+            lists_info = su.get_list_info(response_dict)
+            context = {
+                'gene': gene_ask,
+                'length': lists_info[4],
+                'A': lists_info[0],
+                'G': lists_info[2],
+                'C': lists_info[1],
+                'T': lists_info[3]
+            }
+            contents = su.read_template_html_file('./html/geneCalc.html').render(context=context)
         else:
             contents = su.read_template_html_file('./html/ERROR.html').render()
 

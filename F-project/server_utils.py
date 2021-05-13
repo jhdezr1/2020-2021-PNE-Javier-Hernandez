@@ -86,3 +86,22 @@ def get_dict(ENDPOINT):
     # getting the dictionary
     response_dict = json.loads(response.read().decode())
     return response_dict
+
+def get_list_info(dict_info):
+    sequence_asked = dict_info['seq']
+    seq_seq = Seq(sequence_asked)
+    length_seq = []
+    length = seq_seq.len()
+    length_seq.append(length)
+    info_dict = seq_seq.info_seq()
+    list_A = info_dict['A']
+    list_C = info_dict['C']
+    list_G = info_dict['G']
+    list_T = info_dict['T']
+    lists_info = []
+    lists_info.append(list_A)
+    lists_info.append(list_C)
+    lists_info.append(list_G)
+    lists_info.append(list_T)
+    lists_info.append(length_seq)
+    return lists_info
