@@ -60,59 +60,90 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if path_name == '/':
             contents = su.read_template_html_file('./html/index.html').render()
         elif path_name == '/listSpecies':
-            for e in species_full:
-                species_name.append(e['display_name'])
-            if 'limit' not in arguments:
-                context['length'] = len(species_name)
-                context['list_species'] = species_name
-                contents = su.read_template_html_file('./html/list_lim_no.html').render(context=context)
-            else:
-                if int(arguments['limit'][0]) <= len(species_name):
+            try:
+                for e in species_full:
+                    species_name.append(e['display_name'])
+                if 'limit' not in arguments:
                     context['length'] = len(species_name)
                     context['list_species'] = species_name
-                    context['limit'] = int(arguments['limit'][0])
-                    contents =su. read_template_html_file('./html/list_species.html').render(context=context)
+                    contents = su.read_template_html_file('./html/list_lim_no.html').render(context=context)
                 else:
-                    contents = su.read_template_html_file('./html/ERROR.html').render()
-        elif path_name == '/karyotype':
-            species_input = arguments['specie'][0]
-            response_dict = su.get_dict(ENDPOINT2)
-            karyotype_list = response_dict['karyotype']
-            context = {
-                'karyotype_list': karyotype_list
-            }
-            contents = su.read_template_html_file('./html/karyotype.html').render(context=context)
-        elif path_name == '/chromosomeLength':
-            if 'specie' not in arguments:
-                contents = su.read_template_html_file('./html/ERROR.html').render()
-            elif 'chromo' not in arguments:
-                contents = su.read_template_html_file('./html/ERROR.html').render()
-            else:
-                species_input = arguments['specie'][0]
-                chromo_input = arguments['chromo'][0]
-                response_dict = su.get_dict(ENDPOINT2 + species_input)
-                for e in response_dict['top_level_region']:
-                    if e['name'] == chromo_input and e['coord_system'] == 'chromosome':
-                        length_chromo = e['length']
-
+                    if int(arguments['limit'][0]) <= len(species_name):
+                        context['length'] = len(species_name)
+                        context['list_species'] = species_name
+                        context['limit'] = int(arguments['limit'][0])
+                        contents =su. read_template_html_file('./html/list_species.html').render(context=context)
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
+            except KeyError:
+                contents = su.read_template_html_file('./html/ERROR.html').render()
+        elif path_name == '/karyotype':
+            try:
+                species_input = arguments['specie'][0]
+                response_dict = su.get_dict(ENDPOINT2 + species_input)
+                karyotype_list = response_dict['karyotype']
                 context = {
-                    'length_chromo': length_chromo
+                    'karyotype_list': karyotype_list
                 }
-                contents = su.read_template_html_file('./html/length.html').render(context=context)
+                contents = su.read_template_html_file('./html/karyotype.html').render(context=context)
+            except KeyError:
+                contents = su.read_template_html_file('./html/ERROR.html').render()
+        elif path_name == '/chromosomeLength':
+            try:
+                if 'specie' not in arguments:
+                    contents = su.read_template_html_file('./html/ERROR.html').render()
+                elif 'chromo' not in arguments:
+                    contents = su.read_template_html_file('./html/ERROR.html').render()
+                else:
+                    species_input = arguments['specie'][0]
+                    chromo_input = arguments['chromo'][0]
+                    response_dict = su.get_dict(ENDPOINT2 + species_input)
+                    for e in response_dict['top_level_region']:
+                        if e['name'] == chromo_input and e['coord_system'] == 'chromosome':
+                            length_chromo = e['length']
+
+                        else:
+                            contents = su.read_template_html_file('./html/ERROR.html').render()
+                    context = {
+                        'length_chromo': length_chromo
+                    }
+                    contents = su.read_template_html_file('./html/length.html').render(context=context)
+            except KeyError:
+                contents = su.read_template_html_file('./html/ERROR.html').render()
         elif path_name == '/geneSeq':
             try:
                 gene_ask = arguments['gene'][0]
                 id_gene = DICT_GENES_ID[gene_ask]
                 response_dict = su.get_dict(ENDPOINT3 + id_gene)
                 sequence_asked = response_dict['seq']
-                print(sequence_asked)
                 context = {
                     'sequence': sequence_asked,
                     'gene': gene_ask
                 }
                 contents = su.read_template_html_file('./html/geneSeq.html').render(context=context)
+            except KeyError:
+                contents = su.read_template_html_file('./html/ERROR.html').render()
+        elif path_name == '/geneInfo':
+            try:
+                gene_ask = arguments['gene'][0]
+                id_gene = DICT_GENES_ID[gene_ask]
+                response_dict = su.get_dict(ENDPOINT3 + id_gene)
+                chromosome_info_list = response_dict['desc'].split(':')
+                name_chromosome = chromosome_info_list[1]
+                number_chromosome =  chromosome_info_list[2]
+                start_coordinates =  chromosome_info_list[3]
+                end_coordinates =  chromosome_info_list[4]
+                lists_info = su.get_list_info(response_dict)
+                context = {
+                    'name_chromosome' : name_chromosome,
+                    'number_chromosome': number_chromosome,
+                    'start_coordinates': start_coordinates,
+                    'end_coordinates': end_coordinates,
+                    'id': id_gene,
+                    'length_gene': lists_info[4],
+                    'gene': gene_ask
+                }
+                contents = su.read_template_html_file('./html/geneInfo.html').render(context=context)
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
         elif path_name == '/geneCalc':
@@ -135,7 +166,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         else:
             contents = su.read_template_html_file('./html/ERROR.html').render()
 
-        
+        print(contents)
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
 
