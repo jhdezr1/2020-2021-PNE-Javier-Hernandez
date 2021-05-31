@@ -61,7 +61,6 @@ while True:
         # -- We decode it for converting it
         # -- into a human-redeable string
         msg = msg_raw.decode()
-
         formatted_message = server_utils.format_command(msg)
         formatted_message = formatted_message.split(" ")
         if len(formatted_message) == 1:
@@ -93,6 +92,7 @@ while True:
         if command == 'REV':
             server_utils.rev_send(cs, argument)
         if command == 'GENE':
+            print(argument)
             server_utils.gene_send(cs, argument)
 
         # -- Send a response message to the client

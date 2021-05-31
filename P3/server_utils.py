@@ -48,7 +48,7 @@ def gene_send(cs, argument):
     gene_path = './sequences/'
     termcolor.cprint('GENE', 'green')
     s = Seq()
-    s.read_fasta(gene_path + argument)
+    s.read_fasta(gene_path + argument + '.txt')
     response = str(s) + '\n'
     print(response)
     cs.send(response.encode())
