@@ -326,7 +326,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             content_type = 'text/html'
             error_code = 404
 
-        print(contents)
         # Generating the response message
         self.send_response(error_code)  # -- Status line: OK!
 
