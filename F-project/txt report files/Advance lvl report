@@ -1,0 +1,1100 @@
+-------> / endpoint
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8081/
+
+* Output:
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browsing Human and vertebrates genome</title>
+</head>
+<body style="background-color: antiquewhite">
+    <h1>Browsing Human and vertebrates genome</h1>
+    <h2>Basic Level Services</h2>
+    <p>1) List of species in the genome database</p>
+    <form action="listSpecies" method="get">
+        Limit: <input type="Text" name="limit"><br>
+        <input type="submit" value="Send">
+    </form>
+    <br>
+    <p>2)Information about the karyotype:</p>
+    <form action="karyotype" method="get">
+        Select the species: <input type="Text" name="specie"><br>
+        <input type="submit" value="Send">
+    </form>
+    <br>
+    <p>Chromosome Length</p>
+    <form action="chromosomeLength" method="get">
+        Select the species: <input type="Text" name="specie"><br>
+        Select the chromosome: <input type="Text" name="chromo"><br>
+        <input type="submit" value="GET">
+    </form>
+    <h2>Medium level Services</h2>
+    <p>1) Ask for a sequence of a HUMAN gene</p>
+    <form action="geneSeq" method="get">
+        Enter the gene: <input type="Text" name="gene"><br>
+        <input type="submit" value="GET">
+    </form>
+    <br>
+    <p>2) ask for the info of a HUMAN gene</p>
+    <form action="geneInfo" method="get">
+        Enter the gene: <input type="Text" name="gene"><br>
+        <input type="submit" value="GET">
+    </form>
+    <br>
+    <p>3) Ask for the calculations of a HUMAN gene</p>
+    <form action="geneCalc" method="get">
+        Enter the gene: <input type="Text" name="gene"><br>
+        <input type="submit" value="GET">
+    </form>
+
+* TEST 1 (&json1):
+
+* Input:
+
+http://127.0.0.1:8081/?&json=1
+
+* Output:
+
+{}
+
+-------> listSpecies endpoint
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8081/listSpecies?limit=
+
+* Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>List of Species</title>
+  </head>
+  <body style="background-color: lightcyan;">
+    <p>The total numb of species in the ensembl is: 310</p>
+    <p>You have chosen no limit</p>
+        <ul>
+
+            <li> Jewelled blenny </li>
+
+            <li> Beluga whale </li>
+
+            <li> Lion </li>
+
+            <li> Platyfish </li>
+
+            <li> Hybrid - Bos Indicus </li>
+
+            <li> Chinese hamster CHOK1GS </li>
+
+            <li> Monterrey platyfish </li>
+
+            <li> Western mosquitofish </li>
+
+            <li> Rufous-capped babbler </li>
+
+            <li> Siberian musk deer </li>
+
+            <li> Common carp german mirror </li>
+
+            <li> Australian saltwater crocodile </li>
+
+            <li> Tasmanian devil </li>
+
+            <li> Leopard </li>
+
+            <li> Mouse NOD/ShiLtJ </li>
+
+            <li> Chacoan peccary </li>
+
+            <li> Dog - Great Dane </li>
+
+            <li> Indian glassy fish </li>
+
+            <li> Great spotted kiwi </li>
+
+            <li> Daurian ground squirrel </li>
+
+            <li> Greater amberjack </li>
+
+            <li> Vervet-AGM </li>
+
+            <li> Pig - Largewhite </li>
+
+            <li> Marmoset </li>
+
+            <li> Three-toed box turtle </li>
+
+            <li> Human </li>
+
+            <li> C.intestinalis </li>
+
+            <li> Tuatara </li>
+
+            <li> Goat </li>
+
+            <li> Chinese hamster CriGri </li>
+
+            <li> Coquerel's sifaka </li>
+
+            <li> Atlantic salmon </li>
+
+            <li> Sloth </li>
+
+            <li> Golden Hamster </li>
+
+            <li> Okarito brown kiwi </li>
+
+            <li> Gilthead seabream </li>
+
+            <li> Green anole </li>
+
+            <li> Pig - Rongchang </li>
+
+            <li> Denticle herring </li>
+
+            <li> Spotted gar </li>
+
+            <li> Chinese medaka </li>
+
+            <li> Wild yak </li>
+
+            <li> Great Tit </li>
+
+            <li> Yellowtail amberjack </li>
+
+            <li> Chilean tinamou </li>
+
+            <li> Bushbaby </li>
+
+            <li> Brown trout </li>
+
+            <li> Hagfish </li>
+
+            <li> Dog - Basenji </li>
+
+            <li> Pig USMARC </li>
+
+            <li> Pig - Landrace </li>
+
+            <li> Eurasian sparrowhawk </li>
+
+            <li> Large yellow croaker </li>
+
+            <li> Sheepshead minnow </li>
+
+            <li> African ostrich </li>
+
+            <li> Mouse CBA/J </li>
+
+            <li> Medium ground-finch </li>
+
+            <li> Bonobo </li>
+
+            <li> Blue tilapia </li>
+
+            <li> Platypus </li>
+
+            <li> Little spotted kiwi </li>
+
+            <li> Kangaroo rat </li>
+
+            <li> Pig - Jinhua </li>
+
+            <li> Swan goose </li>
+
+            <li> Pig - Wuzhishan </li>
+
+            <li> Shrew </li>
+
+            <li> American bison </li>
+
+            <li> Orangutan </li>
+
+            <li> Canada lynx </li>
+
+            <li> Turbot </li>
+
+            <li> Rabbit </li>
+
+            <li> Mongolian gerbil </li>
+
+            <li> Alpine marmot </li>
+
+            <li> Channel catfish </li>
+
+            <li> Chinese hamster PICR </li>
+
+            <li> Hyrax </li>
+
+            <li> Tiger </li>
+
+            <li> Arctic ground squirrel </li>
+
+            <li> Emu </li>
+
+            <li> Damara mole rat </li>
+
+            <li> Pig-tailed macaque </li>
+
+            <li> Alpaca </li>
+
+            <li> Crab-eating macaque </li>
+
+            <li> Makobe Island cichlid </li>
+
+            <li> Opossum </li>
+
+            <li> Turquoise killifish </li>
+
+            <li> Small tree finch </li>
+
+            <li> Rainbow trout </li>
+
+            <li> Collared flycatcher </li>
+
+            <li> Common snapping turtle </li>
+
+            <li> Elephant </li>
+
+            <li> West African mud turtle </li>
+
+            <li> Blue whale </li>
+
+            <li> Coho salmon </li>
+
+            <li> Pig - Tibetan </li>
+
+            <li> Japanese medaka HdrR </li>
+
+            <li> Blue tit </li>
+
+            <li> Barramundi perch </li>
+
+            <li> Chicken </li>
+
+            <li> Red fox </li>
+
+            <li> Blunt-snouted clingfish </li>
+
+            <li> Gelada </li>
+
+            <li> Climbing perch </li>
+
+            <li> Saccharomyces cerevisiae </li>
+
+            <li> Greater horseshoe bat </li>
+
+            <li> Goldfish </li>
+
+            <li> Macaque </li>
+
+            <li> Mexican tetra </li>
+
+            <li> Tarsier </li>
+
+            <li> Golden eagle </li>
+
+            <li> Reedfish </li>
+
+            <li> Chinook salmon </li>
+
+            <li> Mouse C57BL/6NJ </li>
+
+            <li> Pig - Hampshire </li>
+
+            <li> Siamese fighting fish </li>
+
+            <li> Gibbon </li>
+
+            <li> Mouse AKR/J </li>
+
+            <li> Silver-eye </li>
+
+            <li> Bengalese finch </li>
+
+            <li> Chimpanzee </li>
+
+            <li> Ferret </li>
+
+            <li> Live sharksucker </li>
+
+            <li> Leishan spiny toad </li>
+
+            <li> Degu </li>
+
+            <li> Pig - Pietrain </li>
+
+            <li> Clown anemonefish </li>
+
+            <li> Tropical clawed frog </li>
+
+            <li> Kakapo </li>
+
+            <li> Mouse DBA/2J </li>
+
+            <li> Naked mole-rat male </li>
+
+            <li> Komodo dragon </li>
+
+            <li> Goat (black bengal) </li>
+
+            <li> Common canary </li>
+
+            <li> Sheep (texel) </li>
+
+            <li> Eastern happy </li>
+
+            <li> Swainson's thrush </li>
+
+            <li> Sheep </li>
+
+            <li> Common kestrel </li>
+
+            <li> Lumpfish </li>
+
+            <li> Steppe mouse </li>
+
+            <li> Japanese medaka HNI </li>
+
+            <li> Zebra finch </li>
+
+            <li> Mouse </li>
+
+            <li> Angola colobus </li>
+
+            <li> Nile tilapia </li>
+
+            <li> Bolivian squirrel monkey </li>
+
+            <li> Mouse C3H/HeJ </li>
+
+            <li> Meerkat </li>
+
+            <li> Donkey </li>
+
+            <li> Golden snub-nosed monkey </li>
+
+            <li> Elephant shark </li>
+
+            <li> Painted turtle </li>
+
+            <li> Golden-line barbel </li>
+
+            <li> Common carp huanghe </li>
+
+            <li> Algerian mouse </li>
+
+            <li> Shrew mouse </li>
+
+            <li> Mouse A/J </li>
+
+            <li> Koala </li>
+
+            <li> Ugandan red Colobus </li>
+
+            <li> Budgerigar </li>
+
+            <li> Indian cobra </li>
+
+            <li> Common wall lizard </li>
+
+            <li> Fugu </li>
+
+            <li> Eastern brown snake </li>
+
+            <li> Ocean sunfish </li>
+
+            <li> Arabian camel </li>
+
+            <li> Megabat </li>
+
+            <li> Tetraodon </li>
+
+            <li> Pig - Berkshire </li>
+
+            <li> Turkey </li>
+
+            <li> New Caledonian crow </li>
+
+            <li> Helmeted guineafowl </li>
+
+            <li> Japanese medaka HSOK </li>
+
+            <li> Stickleback </li>
+
+            <li> Rat </li>
+
+            <li> Agassiz's desert tortoise </li>
+
+            <li> Golden-collared manakin </li>
+
+            <li> Asiatic black bear </li>
+
+            <li> Yellow-billed parrot </li>
+
+            <li> Goodes thornscrub tortoise </li>
+
+            <li> Mouse NZO/HlLtJ </li>
+
+            <li> Cow </li>
+
+            <li> Pig - Bamei </li>
+
+            <li> Mouse Lemur </li>
+
+            <li> Pinecone soldierfish </li>
+
+            <li> Capuchin </li>
+
+            <li> Dingo </li>
+
+            <li> American black bear </li>
+
+            <li> Microbat </li>
+
+            <li> Prairie vole </li>
+
+            <li> Northern spotted owl </li>
+
+            <li> Ryukyu mouse </li>
+
+            <li> Sperm whale </li>
+
+            <li> Polar bear </li>
+
+            <li> Ruff </li>
+
+            <li> Golden pheasant </li>
+
+            <li> Mummichog </li>
+
+            <li> Pachon cavefish </li>
+
+            <li> Eastern buzzard </li>
+
+            <li> Dark-eyed junco </li>
+
+            <li> Guinea Pig </li>
+
+            <li> Drill </li>
+
+            <li> Central bearded dragon </li>
+
+            <li> Dolphin </li>
+
+            <li> Sailfin molly </li>
+
+            <li> Mouse BALB/cJ </li>
+
+            <li> Paramormyrops kingsleyae </li>
+
+            <li> Mallard </li>
+
+            <li> Common wombat </li>
+
+            <li> Spiny chromis </li>
+
+            <li> Ballan wrasse </li>
+
+            <li> Chinese softshell turtle </li>
+
+            <li> American beaver </li>
+
+            <li> Red-bellied piranha </li>
+
+            <li> Naked mole-rat female </li>
+
+            <li> Huchen </li>
+
+            <li> Lyretail cichlid </li>
+
+            <li> Mouse LP/J </li>
+
+            <li> American mink </li>
+
+            <li> Pike-perch </li>
+
+            <li> Upper Galilee mountains blind mole rat </li>
+
+            <li> Blind barbel </li>
+
+            <li> Orbiculate cardinalfish </li>
+
+            <li> Electric eel </li>
+
+            <li> Hedgehog </li>
+
+            <li> Round goby </li>
+
+            <li> Horse </li>
+
+            <li> Midas cichlid </li>
+
+            <li> Drosophila melanogaster </li>
+
+            <li> Mouse PWK/PhJ </li>
+
+            <li> Cat </li>
+
+            <li> Domestic yak </li>
+
+            <li> Abingdon island giant tortoise </li>
+
+            <li> Eurasian red squirrel </li>
+
+            <li> Muscovy Duck (domestic type) </li>
+
+            <li> Horned golden-line barbel </li>
+
+            <li> Zebrafish </li>
+
+            <li> Swamp eel </li>
+
+            <li> Sooty mangabey </li>
+
+            <li> Lesser hedgehog tenrec </li>
+
+            <li> Greater bamboo lemur </li>
+
+            <li> Bicolor damselfish </li>
+
+            <li> Asian bonytongue </li>
+
+            <li> C.savignyi </li>
+
+            <li> Superb fairywren </li>
+
+            <li> Zig-zag eel </li>
+
+            <li> Blue-crowned manakin </li>
+
+            <li> Mangrove rivulus </li>
+
+            <li> Oriental scops-owl </li>
+
+            <li> California sea lion </li>
+
+            <li> Tongue sole </li>
+
+            <li> Giant panda </li>
+
+            <li> Long-tailed chinchilla </li>
+
+            <li> Northern pike </li>
+
+            <li> Hybrid - Bos Taurus </li>
+
+            <li> Zebra mbuna </li>
+
+            <li> Olive baboon </li>
+
+            <li> Mainland tiger snake </li>
+
+            <li> White-throated sparrow </li>
+
+            <li> Pink-footed goose </li>
+
+            <li> Vaquita </li>
+
+            <li> Brazilian guinea pig </li>
+
+            <li> Atlantic cod </li>
+
+            <li> Ring-necked pheasant </li>
+
+            <li> Common carp hebao red </li>
+
+            <li> Yarkand deer </li>
+
+            <li> Tree Shrew </li>
+
+            <li> Gouldian finch </li>
+
+            <li> Mouse FVB/NJ </li>
+
+            <li> Duck </li>
+
+            <li> Argentine black and white tegu </li>
+
+            <li> Black snub-nosed monkey </li>
+
+            <li> Wallaby </li>
+
+            <li> Eastern spot-billed duck </li>
+
+            <li> Guppy </li>
+
+            <li> Gorilla </li>
+
+            <li> Squirrel </li>
+
+            <li> Tiger tail seahorse </li>
+
+            <li> Indian peafowl </li>
+
+            <li> Japanese quail </li>
+
+            <li> Burrowing owl </li>
+
+            <li> Shortfin molly </li>
+
+            <li> Atlantic herring </li>
+
+            <li> Amazon molly </li>
+
+            <li> Blue-ringed sea krait </li>
+
+            <li> Coelacanth </li>
+
+            <li> Mouse 129S1/SvImJ </li>
+
+            <li> European seabass </li>
+
+            <li> Ma's night monkey </li>
+
+            <li> Northern American deer mouse </li>
+
+            <li> Armadillo </li>
+
+            <li> Burton's mouthbrooder </li>
+
+            <li> Javanese ricefish </li>
+
+            <li> Dog </li>
+
+            <li> Periophthalmus magnuspinnatus </li>
+
+            <li> Channel bull blenny </li>
+
+            <li> Lesser Egyptian jerboa </li>
+
+            <li> Indian medaka </li>
+
+            <li> Pig - Meishan </li>
+
+            <li> Lamprey </li>
+
+            <li> Pig </li>
+
+            <li> Spoon-billed sandpiper </li>
+
+            <li> Narwhal </li>
+
+            <li> Caenorhabditis elegans </li>
+
+            <li> Orange clownfish </li>
+
+            <li> Common carp </li>
+
+            <li> Mouse CAST/EiJ </li>
+
+            <li> Eurasian eagle-owl </li>
+
+            <li> Pika </li>
+
+            <li> Mouse WSB/EiJ </li>
+
+        </ul>
+
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+* TEST 1 (&json=1):
+
+*Input:
+
+http://127.0.0.1:8081/listSpecies?limit=&json=1
+
+* Output:
+
+{"length": 310, "list_species": ["Little spotted kiwi", "Indian glassy fish", "Blue tit", "Narwhal", "American beaver", "Lumpfish", "Chinese hamster CHOK1GS", "Channel bull blenny", "Golden Hamster", "Wild yak", "Siamese fighting fish", "Eastern happy", "Hyrax", "Eurasian eagle-owl", "Japanese quail", "Fugu", "Asian bonytongue", "Blue-ringed sea krait", "Mouse CBA/J", "Agassiz's desert tortoise", "Lyretail cichlid", "Coho salmon", "Oriental scops-owl", "Zebra mbuna", "Arctic ground squirrel", "Clown anemonefish", "Koala", "Algerian mouse", "Sheep (texel)", "Mouse C3H/HeJ", "Dog", "Spoon-billed sandpiper", "Northern American deer mouse", "Burrowing owl", "Saccharomyces cerevisiae", "Spotted gar", "Steppe mouse", "Canada lynx", "Polar bear", "Amazon molly", "Tongue sole", "Platypus", "Common snapping turtle", "Painted turtle", "Opossum", "Golden snub-nosed monkey", "Helmeted guineafowl", "Golden-line barbel", "C.savignyi", "Gorilla", "Northern pike", "Swamp eel", "Indian peafowl", "Barramundi perch", "Meerkat", "Chinese medaka", "Pig - Wuzhishan", "Makobe Island cichlid", "Reedfish", "Ryukyu mouse", "Red fox", "Wallaby", "Central bearded dragon", "Vaquita", "Capuchin", "Alpaca", "Lesser hedgehog tenrec", "Angola colobus", "Pig-tailed macaque", "Cow", "Orbiculate cardinalfish", "Eastern spot-billed duck", "Common carp hebao red", "Yellowtail amberjack", "Brazilian guinea pig", "Mexican tetra", "Ruff", "Domestic yak", "Zebra finch", "Black snub-nosed monkey", "Bengalese finch", "Damara mole rat", "Japanese medaka HdrR", "Budgerigar", "Tarsier", "Chacoan peccary", "Platyfish", "Duck", "Swainson's thrush", "Elephant shark", "Turquoise killifish", "Pig USMARC", "Ugandan red Colobus", "Pig - Tibetan", "Lion", "Lesser Egyptian jerboa", "Stickleback", "Guinea Pig", "Dingo", "Daurian ground squirrel", "Dog - Basenji", "Three-toed box turtle", "Tasmanian devil", "Siberian musk deer", "Pig - Largewhite", "Mouse A/J", "Indian medaka", "Mouse CAST/EiJ", "Cat", "Chinese hamster CriGri", "Rat", "Alpine marmot", "Goat", "Medium ground-finch", "Shrew mouse", "Megabat", "Orangutan", "Atlantic salmon", "Sooty mangabey", "Chicken", "Green anole", "Argentine black and white tegu", "Degu", "Indian cobra", "Drill", "Caenorhabditis elegans", "Marmoset", "Goodes thornscrub tortoise", "Rufous-capped babbler", "Pink-footed goose", "Pig - Landrace", "Upper Galilee mountains blind mole rat", "Bicolor damselfish", "Live sharksucker", "Coquerel's sifaka", "Dolphin", "Mouse LP/J", "Tree Shrew", "Atlantic herring", "Greater horseshoe bat", "Gouldian finch", "C.intestinalis", "Blue tilapia", "Tropical clawed frog", "California sea lion", "Dog - Great Dane", "Muscovy Duck (domestic type)", "Mouse NOD/ShiLtJ", "Goat (black bengal)", "Human", "Great spotted kiwi", "Ocean sunfish", "Bolivian squirrel monkey", "Chinook salmon", "Zig-zag eel", "Naked mole-rat female", "Turkey", "Armadillo", "Paramormyrops kingsleyae", "Guppy", "Lamprey", "Hybrid - Bos Indicus", "Sloth", "Huchen", "Rainbow trout", "Large yellow croaker", "Asiatic black bear", "Pig - Pietrain", "Blue-crowned manakin", "Javanese ricefish", "Swan goose", "Blunt-snouted clingfish", "African ostrich", "Common carp", "Turbot", "Hedgehog", "Olive baboon", "Western mosquitofish", "Long-tailed chinchilla", "Hagfish", "Macaque", "Prairie vole", "Atlantic cod", "Microbat", "Pike-perch", "Midas cichlid", "Mouse Lemur", "Beluga whale", "Mouse AKR/J", "Dark-eyed junco", "Ferret", "Blind barbel", "Emu", "Collared flycatcher", "Ma's night monkey", "Mallard", "Silver-eye", "Eastern brown snake", "Tiger", "Pig - Hampshire", "Common canary", "Tiger tail seahorse", "Mouse PWK/PhJ", "Greater bamboo lemur", "West African mud turtle", "Japanese medaka HSOK", "Brown trout", "Tuatara", "Pig - Jinhua", "Shrew", "Sperm whale", "European seabass", "Pinecone soldierfish", "Pig - Bamei", "American black bear", "Sheepshead minnow", "Great Tit", "Squirrel", "Sailfin molly", "Mouse BALB/cJ", "Common wombat", "Mouse WSB/EiJ", "Eurasian sparrowhawk", "Mouse 129S1/SvImJ", "Horned golden-line barbel", "Mongolian gerbil", "Naked mole-rat male", "Jewelled blenny", "New Caledonian crow", "American mink", "Eastern buzzard", "Australian saltwater crocodile", "Chimpanzee", "Horse", "Common wall lizard", "Kakapo", "Abingdon island giant tortoise", "Pig - Meishan", "Golden pheasant", "Hybrid - Bos Taurus", "Mouse FVB/NJ", "Chinese softshell turtle", "Gilthead seabream", "Okarito brown kiwi", "Mangrove rivulus", "Gelada", "Leishan spiny toad", "Kangaroo rat", "Superb fairywren", "Pachon cavefish", "Mouse C57BL/6NJ", "White-throated sparrow", "Common carp huanghe", "Donkey", "Golden eagle", "Red-bellied piranha", "Elephant", "Pig - Berkshire", "Giant panda", "Ballan wrasse", "Eurasian red squirrel", "Arabian camel", "Bonobo", "Ring-necked pheasant", "Bushbaby", "Nile tilapia", "Common carp german mirror", "Orange clownfish", "Common kestrel", "Pig - Rongchang", "Coelacanth", "Goldfish", "Periophthalmus magnuspinnatus", "Northern spotted owl", "Shortfin molly", "Crab-eating macaque", "American bison", "Yarkand deer", "Electric eel", "Climbing perch", "Rabbit", "Mouse", "Gibbon", "Monterrey platyfish", "Mouse NZO/HlLtJ", "Round goby", "Yellow-billed parrot", "Mainland tiger snake", "Chinese hamster PICR", "Pika", "Mouse DBA/2J", "Channel catfish", "Japanese medaka HNI", "Zebrafish", "Small tree finch", "Golden-collared manakin", "Drosophila melanogaster", "Chilean tinamou", "Blue whale", "Spiny chromis", "Vervet-AGM", "Burton's mouthbrooder", "Denticle herring", "Leopard", "Tetraodon", "Sheep", "Mummichog", "Pig", "Komodo dragon", "Greater amberjack"]}
+
+* TEST 2:
+
+* Input:
+
+http://127.0.0.1:8081/listSpecies?limit=3
+
+* Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Bases server</title>
+  </head>
+  <body style="background-color: lightcyan;">
+    <p>The total number of species in the ensembl is: 310</p>
+    <p>The limit you have selected is: 3</p>
+        <ul>
+
+            <li> Little spotted kiwi </li>
+
+            <li> Indian glassy fish </li>
+
+            <li> Blue tit </li>
+
+        </ul>
+
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+* TEST 2 (&json=1):
+
+* Input:
+
+http://127.0.0.1:8081/listSpecies?limit=3&json=1
+
+* Output:
+
+{"length": 310, "list_species": ["Little spotted kiwi", "Indian glassy fish", "Blue tit"], "limit": 3}
+
+-------> karyotype endpoint
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8081/karyotype?specie=human
+
+* Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>karyotype</title>
+  </head>
+  <body style="background-color: lightcyan;">
+    <p>The names the chromosomes are:</p>
+
+    <p>1</p>
+
+    <p>2</p>
+
+    <p>3</p>
+
+    <p>4</p>
+
+    <p>5</p>
+
+    <p>6</p>
+
+    <p>7</p>
+
+    <p>8</p>
+
+    <p>9</p>
+
+    <p>10</p>
+
+    <p>11</p>
+
+    <p>12</p>
+
+    <p>13</p>
+
+    <p>14</p>
+
+    <p>15</p>
+
+    <p>16</p>
+
+    <p>17</p>
+
+    <p>18</p>
+
+    <p>19</p>
+
+    <p>20</p>
+
+    <p>21</p>
+
+    <p>22</p>
+
+    <p>X</p>
+
+    <p>Y</p>
+
+    <p>MT</p>
+
+
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+* TEST 1 (&json=1):
+
+* Input:
+
+http://127.0.0.1:8081/karyotype?specie=human&json=1
+
+* Output:
+
+{"karyotype_list": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"]}
+
+*TEST 2:
+
+*Input:
+
+http://127.0.0.1:8081/karyotype?specie=mouse
+
+*Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>karyotype</title>
+  </head>
+  <body style="background-color: lightcyan;">
+    <p>The names the chromosomes are:</p>
+
+    <p>1</p>
+
+    <p>2</p>
+
+    <p>3</p>
+
+    <p>4</p>
+
+    <p>5</p>
+
+    <p>6</p>
+
+    <p>7</p>
+
+    <p>8</p>
+
+    <p>9</p>
+
+    <p>10</p>
+
+    <p>11</p>
+
+    <p>12</p>
+
+    <p>13</p>
+
+    <p>14</p>
+
+    <p>15</p>
+
+    <p>16</p>
+
+    <p>17</p>
+
+    <p>18</p>
+
+    <p>19</p>
+
+    <p>X</p>
+
+    <p>Y</p>
+
+    <p>MT</p>
+
+
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+**TEST 2(&json=1):
+
+*Input:
+
+http://127.0.0.1:8081/karyotype?specie=mouse&json=1
+
+*output:
+
+{"karyotype_list": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "X", "Y", "MT"]}
+
+-------> lengthChromosome endpoint
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8081/chromosomeLength?specie=human&chromo=X
+
+* Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>length of the chromosome</title>
+  </head>
+  <body style="background-color: lightcyan;">
+    <p>The names the length of the chromosome chosen is: 156040895</p>
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+* TEST 1(&json=1):
+
+* Input:
+
+http://127.0.0.1:8081/chromosomeLength?specie=human&chromo=X&json=1
+
+* Output:
+
+{"length_chromo": 156040895}
+
+-------> geneSeq endpoint
+* TEST 1:
+
+* Input:
+
+http://127.0.0.1:8081/geneSeq?gene=RNU6_269P
+
+* Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Gene Seq</title>
+  </head>
+  <body style="background-color: lightsalmon;">
+    <p>The sequence of the RNU6_269P gene is:</p><br>
+    <textarea id="sequence" name="gene" rows="5" cols="50">
+        GCTTCCATAGCACAGACTAAAATTGGAAGGATGCCAAGATGATTAGCATGGTCCCTGCACAAGGATGACATGAATTTTTGAAACATTTCGTATTTTT
+    </textarea><br>
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+* TEST 1 (&json=1):
+
+* Input:
+
+http://127.0.0.1:8081/geneSeq?gene=RNU6_269P&json=1
+
+* Output:
+
+{"sequence": "GCTTCCATAGCACAGACTAAAATTGGAAGGATGCCAAGATGATTAGCATGGTCCCTGCACAAGGATGACATGAATTTTTGAAACATTTCGTATTTTT", "gene": "RNU6_269P"}
+
+-------> geneInfo endpoint
+* TEST 1:
+
+* Input:
+
+http://localhost:8081/geneInfo?gene=RNU6_269P
+
+* Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Gene Info</title>
+  </head>
+  <body style="background-color: lightsalmon;">
+    <p>The name of the chromosome the gene RNU6_269P, with id ENSG00000212379, is GRCh38, with number 16</p>
+    <p>The coordinates are:</p>
+    <p>start: 58378052</p>
+    <p>end: 58378148</p>
+    <p>The length of the gene is 97</p>
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+* TEST 1(&json=1):
+
+* Input:
+
+http://localhost:8081/geneInfo?gene=RNU6_269P&json=1
+
+* Output:
+
+{"name_chromosome": "GRCh38", "number_chromosome": "16", "start_coordinates": "58378052", "end_coordinates": "58378148", "id": "ENSG00000212379", "length_gene": [97], "gene": "RNU6_269P"}
+
+-------> geneCalc endpoint
+* TEST 1:
+
+* Input:
+
+http://localhost:8081/geneCalc?gene=RNU6_269P
+
+*Output:
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Gene Calculations</title>
+  </head>
+  <body style="background-color: lightsalmon;">
+    <p>The length of RNU6_269P is: 97</p>
+    <p>The number and percentage of each base present in the gene are:</p>
+    <p>A: 31, (31.95876288659794%)</p>
+    <p>C: 17, (17.52577319587629%)</p>
+    <p>G: 20, (20.61855670103093%)</p>
+    <p>T: 29, (29.896907216494846%)</p>
+    <a href="/">Main Page</a>
+  </body>
+</html>
+
+*TEST 1(%json=1):
+
+*Input:
+
+http://localhost:8081/geneCalc?gene=RNU6_269P&json=1
+
+* Output:
+
+{"gene": "RNU6_269P", "length": [97], "A": [31, 31.95876288659794], "G": [20, 20.61855670103093], "C": [17, 17.52577319587629], "T": [29, 29.896907216494846]}
+
+
+----> TESTING THE CLIENT
+
+Connecting to server: localhost:8081
+
+----------------testing /-----------------
+Response received!: 200 OK
+
+CONTENT: {}
+
+----------------testing /listSpecies?limit=2-----------------
+Response received!: 200 OK
+
+CONTENT: {"length": 310, "list_species": ["Little spotted kiwi", "Indian glassy fish"], "limit": 2}
+
+----------------testing /listSpecies?limit=-----------------
+Response received!: 200 OK
+
+CONTENT: {"length": 310, "list_species": ["Little spotted kiwi", "Indian glassy fish", "Blue tit", "Narwhal", "American beaver", "Lumpfish", "Chinese hamster CHOK1GS", "Channel bull blenny", "Golden Hamster", "Wild yak", "Siamese fighting fish", "Eastern happy", "Hyrax", "Eurasian eagle-owl", "Japanese quail", "Fugu", "Asian bonytongue", "Blue-ringed sea krait", "Mouse CBA/J", "Agassiz's desert tortoise", "Lyretail cichlid", "Coho salmon", "Oriental scops-owl", "Zebra mbuna", "Arctic ground squirrel", "Clown anemonefish", "Koala", "Algerian mouse", "Sheep (texel)", "Mouse C3H/HeJ", "Dog", "Spoon-billed sandpiper", "Northern American deer mouse", "Burrowing owl", "Saccharomyces cerevisiae", "Spotted gar", "Steppe mouse", "Canada lynx", "Polar bear", "Amazon molly", "Tongue sole", "Platypus", "Common snapping turtle", "Painted turtle", "Opossum", "Golden snub-nosed monkey", "Helmeted guineafowl", "Golden-line barbel", "C.savignyi", "Gorilla", "Northern pike", "Swamp eel", "Indian peafowl", "Barramundi perch", "Meerkat", "Chinese medaka", "Pig - Wuzhishan", "Makobe Island cichlid", "Reedfish", "Ryukyu mouse", "Red fox", "Wallaby", "Central bearded dragon", "Vaquita", "Capuchin", "Alpaca", "Lesser hedgehog tenrec", "Angola colobus", "Pig-tailed macaque", "Cow", "Orbiculate cardinalfish", "Eastern spot-billed duck", "Common carp hebao red", "Yellowtail amberjack", "Brazilian guinea pig", "Mexican tetra", "Ruff", "Domestic yak", "Zebra finch", "Black snub-nosed monkey", "Bengalese finch", "Damara mole rat", "Japanese medaka HdrR", "Budgerigar", "Tarsier", "Chacoan peccary", "Platyfish", "Duck", "Swainson's thrush", "Elephant shark", "Turquoise killifish", "Pig USMARC", "Ugandan red Colobus", "Pig - Tibetan", "Lion", "Lesser Egyptian jerboa", "Stickleback", "Guinea Pig", "Dingo", "Daurian ground squirrel", "Dog - Basenji", "Three-toed box turtle", "Tasmanian devil", "Siberian musk deer", "Pig - Largewhite", "Mouse A/J", "Indian medaka", "Mouse CAST/EiJ", "Cat", "Chinese hamster CriGri", "Rat", "Alpine marmot", "Goat", "Medium ground-finch", "Shrew mouse", "Megabat", "Orangutan", "Atlantic salmon", "Sooty mangabey", "Chicken", "Green anole", "Argentine black and white tegu", "Degu", "Indian cobra", "Drill", "Caenorhabditis elegans", "Marmoset", "Goodes thornscrub tortoise", "Rufous-capped babbler", "Pink-footed goose", "Pig - Landrace", "Upper Galilee mountains blind mole rat", "Bicolor damselfish", "Live sharksucker", "Coquerel's sifaka", "Dolphin", "Mouse LP/J", "Tree Shrew", "Atlantic herring", "Greater horseshoe bat", "Gouldian finch", "C.intestinalis", "Blue tilapia", "Tropical clawed frog", "California sea lion", "Dog - Great Dane", "Muscovy Duck (domestic type)", "Mouse NOD/ShiLtJ", "Goat (black bengal)", "Human", "Great spotted kiwi", "Ocean sunfish", "Bolivian squirrel monkey", "Chinook salmon", "Zig-zag eel", "Naked mole-rat female", "Turkey", "Armadillo", "Paramormyrops kingsleyae", "Guppy", "Lamprey", "Hybrid - Bos Indicus", "Sloth", "Huchen", "Rainbow trout", "Large yellow croaker", "Asiatic black bear", "Pig - Pietrain", "Blue-crowned manakin", "Javanese ricefish", "Swan goose", "Blunt-snouted clingfish", "African ostrich", "Common carp", "Turbot", "Hedgehog", "Olive baboon", "Western mosquitofish", "Long-tailed chinchilla", "Hagfish", "Macaque", "Prairie vole", "Atlantic cod", "Microbat", "Pike-perch", "Midas cichlid", "Mouse Lemur", "Beluga whale", "Mouse AKR/J", "Dark-eyed junco", "Ferret", "Blind barbel", "Emu", "Collared flycatcher", "Ma's night monkey", "Mallard", "Silver-eye", "Eastern brown snake", "Tiger", "Pig - Hampshire", "Common canary", "Tiger tail seahorse", "Mouse PWK/PhJ", "Greater bamboo lemur", "West African mud turtle", "Japanese medaka HSOK", "Brown trout", "Tuatara", "Pig - Jinhua", "Shrew", "Sperm whale", "European seabass", "Pinecone soldierfish", "Pig - Bamei", "American black bear", "Sheepshead minnow", "Great Tit", "Squirrel", "Sailfin molly", "Mouse BALB/cJ", "Common wombat", "Mouse WSB/EiJ", "Eurasian sparrowhawk", "Mouse 129S1/SvImJ", "Horned golden-line barbel", "Mongolian gerbil", "Naked mole-rat male", "Jewelled blenny", "New Caledonian crow", "American mink", "Eastern buzzard", "Australian saltwater crocodile", "Chimpanzee", "Horse", "Common wall lizard", "Kakapo", "Abingdon island giant tortoise", "Pig - Meishan", "Golden pheasant", "Hybrid - Bos Taurus", "Mouse FVB/NJ", "Chinese softshell turtle", "Gilthead seabream", "Okarito brown kiwi", "Mangrove rivulus", "Gelada", "Leishan spiny toad", "Kangaroo rat", "Superb fairywren", "Pachon cavefish", "Mouse C57BL/6NJ", "White-throated sparrow", "Common carp huanghe", "Donkey", "Golden eagle", "Red-bellied piranha", "Elephant", "Pig - Berkshire", "Giant panda", "Ballan wrasse", "Eurasian red squirrel", "Arabian camel", "Bonobo", "Ring-necked pheasant", "Bushbaby", "Nile tilapia", "Common carp german mirror", "Orange clownfish", "Common kestrel", "Pig - Rongchang", "Coelacanth", "Goldfish", "Periophthalmus magnuspinnatus", "Northern spotted owl", "Shortfin molly", "Crab-eating macaque", "American bison", "Yarkand deer", "Electric eel", "Climbing perch", "Rabbit", "Mouse", "Gibbon", "Monterrey platyfish", "Mouse NZO/HlLtJ", "Round goby", "Yellow-billed parrot", "Mainland tiger snake", "Chinese hamster PICR", "Pika", "Mouse DBA/2J", "Channel catfish", "Japanese medaka HNI", "Zebrafish", "Small tree finch", "Golden-collared manakin", "Drosophila melanogaster", "Chilean tinamou", "Blue whale", "Spiny chromis", "Vervet-AGM", "Burton's mouthbrooder", "Denticle herring", "Leopard", "Tetraodon", "Sheep", "Mummichog", "Pig", "Komodo dragon", "Greater amberjack"]}
+
+----------------testing /karyotype?specie=human-----------------
+Response received!: 200 OK
+
+CONTENT: {"karyotype_list": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"]}
+
+----------------testing /chromosomeLength?specie=human&chromo=X-----------------
+Response received!: 200 OK
+
+CONTENT: {"length_chromo": 156040895}
+
+----------------testing /geneSeq?gene=RNU6_269P-----------------
+Response received!: 200 OK
+
+CONTENT: {"sequence": "GCTTCCATAGCACAGACTAAAATTGGAAGGATGCCAAGATGATTAGCATGGTCCCTGCACAAGGATGACATGAATTTTTGAAACATTTCGTATTTTT", "gene": "RNU6_269P"}
+
+----------------testing /geneInfo?gene=RNU6_269P-----------------
+Response received!: 200 OK
+
+CONTENT: {"name_chromosome": "GRCh38", "number_chromosome": "16", "start_coordinates": "58378052", "end_coordinates": "58378148", "id": "ENSG00000212379", "length_gene": [97], "gene": "RNU6_269P"}
+
+----------------testing /geneCalc?gene=RNU6_269P-----------------
+Response received!: 200 OK
+
+CONTENT: {"gene": "RNU6_269P", "length": [97], "A": [31, 31.95876288659794], "G": [20, 20.61855670103093], "C": [17, 17.52577319587629], "T": [29, 29.896907216494846]}

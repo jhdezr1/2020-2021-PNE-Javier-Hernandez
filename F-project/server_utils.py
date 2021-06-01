@@ -109,3 +109,24 @@ def get_list_info(dict_info):
 def read_html_file(filename):
     content = pathlib.Path(filename).read_text()
     return content
+
+
+def test_endpoint_json(endpoint):
+    conn = http.client.HTTPConnection('localhost', '8081')
+    try:
+        conn.request("GET", endpoint + '&json=1')
+    except ConnectionRefusedError:
+        print("ERROR! Cannot connect to the Server")
+        exit()
+
+    # -- Read the response message from the server
+    r1 = conn.getresponse()
+
+    # -- Print the status line
+    print(f"Response received!: {r1.status} {r1.reason}\n")
+
+    # -- Read the response's body
+    data1 = r1.read().decode("utf-8")
+
+    # -- Print the received data
+    return data1

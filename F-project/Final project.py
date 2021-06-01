@@ -57,8 +57,22 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         species_full = response_dict['species']
         species_name = []
         if path_name == '/':
-            contents = su.read_template_html_file('./html/index.html').render()
-            content_type = 'text/html'
+            context = {
+
+            }
+            if 'json' in arguments:
+                if arguments['json'][0] == '1':
+                    contents = json.dumps(context)
+                    content_type = 'application/json'
+                    error_code = 200
+                else:
+                    contents = su.read_template_html_file('./html/ERROR.html').render()
+                    content_type = 'text/html'
+                    error_code = 404
+            else:
+                contents = su.read_template_html_file('./html/index.html').render()
+                content_type = 'text/html'
+                error_code = 200
         elif path_name == '/listSpecies':
             try:
                 for e in species_full:
@@ -70,12 +84,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         if arguments['json'][0] == '1':
                             contents = json.dumps(context)
                             content_type = 'application/json'
+                            error_code = 200
                         else:
                             contents = su.read_template_html_file('./html/ERROR.html').render()
                             content_type = 'text/html'
+                            error_code = 404
                     else:
                         contents = su.read_template_html_file('./html/list_lim_no.html').render(context=context)
                         content_type = 'text/html'
+                        error_code = 200
                 else:
                     if int(arguments['limit'][0]) <= len(species_name):
                         context['length'] = len(species_name)
@@ -88,18 +105,23 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                     context['list_species'].append(species_name[e])
                                 contents = json.dumps(context)
                                 content_type = 'application/json'
+                                error_code = 200
                             else:
                                 contents = su.read_template_html_file('./html/ERROR.html').render()
                                 content_type = 'text/html'
+                                error_code = 404
                         else:
                             contents = su.read_template_html_file('./html/list_species.html').render(context=context)
                             content_type = 'text/html'
+                            error_code = 200
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
                 content_type = 'text/html'
+                error_code = 404
         elif path_name == '/karyotype':
             try:
                 if 'json' not in arguments:
@@ -111,6 +133,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     }
                     contents = su.read_template_html_file('./html/karyotype.html').render(context=context)
                     content_type = 'text/html'
+                    error_code = 200
                 else:
                     if arguments['json'][0] == '1':
                         species_input = arguments['specie'][0]
@@ -121,12 +144,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         }
                         contents = json.dumps(context)
                         content_type = 'application/json'
+                        error_code = 200
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
                 content_type = 'text/html'
+                error_code = 404
         elif path_name == '/chromosomeLength':
             try:
                 if 'json' in arguments:
@@ -134,9 +160,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         if 'specie' not in arguments:
                             contents = su.read_template_html_file('./html/ERROR.html').render()
                             content_type = 'text/html'
+                            error_code = 404
                         elif 'chromo' not in arguments:
                             contents = su.read_template_html_file('./html/ERROR.html').render()
                             content_type = 'text/html'
+                            error_code = 404
                         else:
                             species_input = arguments['specie'][0]
                             chromo_input = arguments['chromo'][0]
@@ -148,21 +176,26 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                 else:
                                     contents = su.read_template_html_file('./html/ERROR.html').render()
                                     content_type = 'text/html'
+                                    error_code = 404
                             context = {
                                 'length_chromo': length_chromo
                             }
                             contents = json.dumps(context)
                             content_type = 'application/json'
+                            error_code = 200
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
                 else:
                     if 'specie' not in arguments:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
                     elif 'chromo' not in arguments:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
                     else:
                         species_input = arguments['specie'][0]
                         chromo_input = arguments['chromo'][0]
@@ -174,14 +207,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             else:
                                 contents = su.read_template_html_file('./html/ERROR.html').render()
                                 content_type = 'text/html'
+                                error_code = 404
                         context = {
                             'length_chromo': length_chromo
                         }
                         contents = su.read_template_html_file('./html/length.html').render(context=context)
                         content_type = 'text/html'
+                        error_code = 200
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
                 content_type = 'text/html'
+                error_code = 404
         elif path_name == '/geneSeq':
             try:
                 if 'json' in arguments:
@@ -196,9 +232,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         }
                         contents = json.dumps(context)
                         content_type = 'application/json'
+                        error_code = 200
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
                 else:
                     gene_ask = arguments['gene'][0]
                     id_gene = DICT_GENES_ID[gene_ask]
@@ -210,9 +248,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     }
                     contents = su.read_template_html_file('./html/geneSeq.html').render(context=context)
                     content_type = 'text/html'
+                    error_code = 200
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
                 content_type = 'text/html'
+                error_code = 404
         elif path_name == '/geneInfo':
             try:
                 gene_ask = arguments['gene'][0]
@@ -237,15 +277,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if arguments['json'][0] == '1':
                         contents = json.dumps(context)
                         content_type = 'application/json'
+                        error_code = 200
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
                 else:
                     contents = su.read_template_html_file('./html/geneInfo.html').render(context=context)
                     content_type = 'text/html'
+                    error_code = 200
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
                 content_type = 'text/html'
+                error_code = 404
         elif path_name == '/geneCalc':
             try:
                 gene_ask = arguments['gene'][0]
@@ -264,21 +308,27 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if arguments['json'][0] == '1':
                         contents = json.dumps(context)
                         content_type = 'application/json'
+                        error_code = 200
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
                         content_type = 'text/html'
+                        error_code = 404
                 else:
                     contents = su.read_template_html_file('./html/geneCalc.html').render(context=context)
                     content_type = 'text/html'
+                    error_code = 200
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
                 content_type = 'text/html'
+                error_code = 404
         else:
             contents = su.read_template_html_file('./html/ERROR.html').render()
             content_type = 'text/html'
+            error_code = 404
 
+        print(contents)
         # Generating the response message
-        self.send_response(200)  # -- Status line: OK!
+        self.send_response(error_code)  # -- Status line: OK!
 
         # Define the content-type header:
         self.send_header('Content-Type', content_type)
