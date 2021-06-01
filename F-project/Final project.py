@@ -4,8 +4,7 @@ import socketserver
 import termcolor
 from urllib.parse import urlparse, parse_qs
 import server_utils as su
-from Seq1 import Seq
-
+import json
 PORT = 8081
 
 DICT_GENES_ID = {
@@ -59,6 +58,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         species_name = []
         if path_name == '/':
             contents = su.read_template_html_file('./html/index.html').render()
+            content_type = 'text/html'
         elif path_name == '/listSpecies':
             try:
                 for e in species_full:
@@ -66,63 +66,153 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 if 'limit' not in arguments:
                     context['length'] = len(species_name)
                     context['list_species'] = species_name
-                    contents = su.read_template_html_file('./html/list_lim_no.html').render(context=context)
+                    if 'json' in arguments:
+                        if arguments['json'][0] == '1':
+                            contents = json.dumps(context)
+                            content_type = 'application/json'
+                        else:
+                            contents = su.read_template_html_file('./html/ERROR.html').render()
+                            content_type = 'text/html'
+                    else:
+                        contents = su.read_template_html_file('./html/list_lim_no.html').render(context=context)
+                        content_type = 'text/html'
                 else:
                     if int(arguments['limit'][0]) <= len(species_name):
                         context['length'] = len(species_name)
                         context['list_species'] = species_name
                         context['limit'] = int(arguments['limit'][0])
-                        contents =su. read_template_html_file('./html/list_species.html').render(context=context)
+                        if 'json' in arguments:
+                            if arguments['json'][0] == '1':
+                                context['list_species'] = []
+                                for e in range(0, int(arguments['limit'][0])):
+                                    context['list_species'].append(species_name[e])
+                                contents = json.dumps(context)
+                                content_type = 'application/json'
+                            else:
+                                contents = su.read_template_html_file('./html/ERROR.html').render()
+                                content_type = 'text/html'
+                        else:
+                            contents = su.read_template_html_file('./html/list_species.html').render(context=context)
+                            content_type = 'text/html'
                     else:
                         contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
+                content_type = 'text/html'
         elif path_name == '/karyotype':
             try:
-                species_input = arguments['specie'][0]
-                response_dict = su.get_dict(ENDPOINT2 + species_input)
-                karyotype_list = response_dict['karyotype']
-                context = {
-                    'karyotype_list': karyotype_list
-                }
-                contents = su.read_template_html_file('./html/karyotype.html').render(context=context)
+                if 'json' not in arguments:
+                    species_input = arguments['specie'][0]
+                    response_dict = su.get_dict(ENDPOINT2 + species_input)
+                    karyotype_list = response_dict['karyotype']
+                    context = {
+                        'karyotype_list': karyotype_list
+                    }
+                    contents = su.read_template_html_file('./html/karyotype.html').render(context=context)
+                    content_type = 'text/html'
+                else:
+                    if arguments['json'][0] == '1':
+                        species_input = arguments['specie'][0]
+                        response_dict = su.get_dict(ENDPOINT2 + species_input)
+                        karyotype_list = response_dict['karyotype']
+                        context = {
+                            'karyotype_list': karyotype_list
+                        }
+                        contents = json.dumps(context)
+                        content_type = 'application/json'
+                    else:
+                        contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
+                content_type = 'text/html'
         elif path_name == '/chromosomeLength':
             try:
-                if 'specie' not in arguments:
-                    contents = su.read_template_html_file('./html/ERROR.html').render()
-                elif 'chromo' not in arguments:
-                    contents = su.read_template_html_file('./html/ERROR.html').render()
-                else:
-                    species_input = arguments['specie'][0]
-                    chromo_input = arguments['chromo'][0]
-                    response_dict = su.get_dict(ENDPOINT2 + species_input)
-                    for e in response_dict['top_level_region']:
-                        if e['name'] == chromo_input and e['coord_system'] == 'chromosome':
-                            length_chromo = e['length']
-
-                        else:
+                if 'json' in arguments:
+                    if arguments['json'][0] == '1':
+                        if 'specie' not in arguments:
                             contents = su.read_template_html_file('./html/ERROR.html').render()
-                    context = {
-                        'length_chromo': length_chromo
-                    }
-                    contents = su.read_template_html_file('./html/length.html').render(context=context)
+                            content_type = 'text/html'
+                        elif 'chromo' not in arguments:
+                            contents = su.read_template_html_file('./html/ERROR.html').render()
+                            content_type = 'text/html'
+                        else:
+                            species_input = arguments['specie'][0]
+                            chromo_input = arguments['chromo'][0]
+                            response_dict = su.get_dict(ENDPOINT2 + species_input)
+                            for e in response_dict['top_level_region']:
+                                if e['name'] == chromo_input and e['coord_system'] == 'chromosome':
+                                    length_chromo = e['length']
+
+                                else:
+                                    contents = su.read_template_html_file('./html/ERROR.html').render()
+                                    content_type = 'text/html'
+                            context = {
+                                'length_chromo': length_chromo
+                            }
+                            contents = json.dumps(context)
+                            content_type = 'application/json'
+                    else:
+                        contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
+                else:
+                    if 'specie' not in arguments:
+                        contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
+                    elif 'chromo' not in arguments:
+                        contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
+                    else:
+                        species_input = arguments['specie'][0]
+                        chromo_input = arguments['chromo'][0]
+                        response_dict = su.get_dict(ENDPOINT2 + species_input)
+                        for e in response_dict['top_level_region']:
+                            if e['name'] == chromo_input and e['coord_system'] == 'chromosome':
+                                length_chromo = e['length']
+
+                            else:
+                                contents = su.read_template_html_file('./html/ERROR.html').render()
+                                content_type = 'text/html'
+                        context = {
+                            'length_chromo': length_chromo
+                        }
+                        contents = su.read_template_html_file('./html/length.html').render(context=context)
+                        content_type = 'text/html'
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
+                content_type = 'text/html'
         elif path_name == '/geneSeq':
             try:
-                gene_ask = arguments['gene'][0]
-                id_gene = DICT_GENES_ID[gene_ask]
-                response_dict = su.get_dict(ENDPOINT3 + id_gene)
-                sequence_asked = response_dict['seq']
-                context = {
-                    'sequence': sequence_asked,
-                    'gene': gene_ask
-                }
-                contents = su.read_template_html_file('./html/geneSeq.html').render(context=context)
+                if 'json' in arguments:
+                    if arguments['json'][0] == '1':
+                        gene_ask = arguments['gene'][0]
+                        id_gene = DICT_GENES_ID[gene_ask]
+                        response_dict = su.get_dict(ENDPOINT3 + id_gene)
+                        sequence_asked = response_dict['seq']
+                        context = {
+                            'sequence': sequence_asked,
+                            'gene': gene_ask
+                        }
+                        contents = json.dumps(context)
+                        content_type = 'application/json'
+                    else:
+                        contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
+                else:
+                    gene_ask = arguments['gene'][0]
+                    id_gene = DICT_GENES_ID[gene_ask]
+                    response_dict = su.get_dict(ENDPOINT3 + id_gene)
+                    sequence_asked = response_dict['seq']
+                    context = {
+                        'sequence': sequence_asked,
+                        'gene': gene_ask
+                    }
+                    contents = su.read_template_html_file('./html/geneSeq.html').render(context=context)
+                    content_type = 'text/html'
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
+                content_type = 'text/html'
         elif path_name == '/geneInfo':
             try:
                 gene_ask = arguments['gene'][0]
@@ -143,9 +233,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     'length_gene': lists_info[4],
                     'gene': gene_ask
                 }
-                contents = su.read_template_html_file('./html/geneInfo.html').render(context=context)
+                if 'json' in arguments:
+                    if arguments['json'][0] == '1':
+                        contents = json.dumps(context)
+                        content_type = 'application/json'
+                    else:
+                        contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
+                else:
+                    contents = su.read_template_html_file('./html/geneInfo.html').render(context=context)
+                    content_type = 'text/html'
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
+                content_type = 'text/html'
         elif path_name == '/geneCalc':
             try:
                 gene_ask = arguments['gene'][0]
@@ -160,18 +260,28 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     'C': lists_info[1],
                     'T': lists_info[3]
                 }
-                contents = su.read_template_html_file('./html/geneCalc.html').render(context=context)
+                if 'json' in arguments:
+                    if arguments['json'][0] == '1':
+                        contents = json.dumps(context)
+                        content_type = 'application/json'
+                    else:
+                        contents = su.read_template_html_file('./html/ERROR.html').render()
+                        content_type = 'text/html'
+                else:
+                    contents = su.read_template_html_file('./html/geneCalc.html').render(context=context)
+                    content_type = 'text/html'
             except KeyError:
                 contents = su.read_template_html_file('./html/ERROR.html').render()
+                content_type = 'text/html'
         else:
             contents = su.read_template_html_file('./html/ERROR.html').render()
+            content_type = 'text/html'
 
-        print(contents)
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
 
         # Define the content-type header:
-        self.send_header('Content-Type', 'text/html')
+        self.send_header('Content-Type', content_type)
         self.send_header('Content-Length', len(contents.encode()))
 
         # The header is finished

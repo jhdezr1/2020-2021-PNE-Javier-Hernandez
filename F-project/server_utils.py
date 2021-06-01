@@ -105,3 +105,7 @@ def get_list_info(dict_info):
     lists_info.append(list_T)
     lists_info.append(length_seq)
     return lists_info
+
+def read_html_file(filename):
+    content = pathlib.Path(filename).read_text()
+    return content
