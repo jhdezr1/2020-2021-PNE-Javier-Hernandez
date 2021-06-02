@@ -20,7 +20,7 @@ print(c.talk("PING"))
 #get
 print("* Testing GET...")
 for argument in range(5):
-    print('GET', argument, ':', list_sequences[int(argument)])
+    print(c.talk('GET' + ' ' + str(argument)))
 
 #info
 print("* Testing INFO...")
