@@ -42,13 +42,8 @@ print(c.talk("REV ACGTAAAAGTTTAAGCGCCAAT"))
 
 #gene
 print('* Testing GENE...')
-print('GENE U5')
 print(c.talk("GENE U5"))
-print('GENE ADA')
 print(c.talk("GENE ADA"))
-print('GENE FRAT1')
 print(c.talk("GENE FRAT1"))
-print('GENE FXN')
 print(c.talk("GENE FXN"))
-print('GENE RNU6_269P')
 print(c.talk("GENE RNU6_269P"))

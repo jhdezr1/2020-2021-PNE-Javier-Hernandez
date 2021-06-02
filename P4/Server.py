@@ -43,14 +43,6 @@ def process_client(s):
     # -- Add the Content-Type header
     header = "Content-Type: text/html\n"
 
-    """elif '/info/' in path_name:
-        #where is the letter? string.split('/')[-1]
-        try:
-            body = read_html_file(HTML_ASSETS + path_name.split('/')[-1] + '.html')
-        except FileNotFoundError:
-            body = read_html_file(HTML_ASSETS + 'ERROR.html')
-    else:
-        body = read_html_file(HTML_ASSETS + 'ERROR.html')"""
 
     if path_name == '/':
         body = read_html_file('./html/Index.html')
